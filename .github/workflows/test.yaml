@@ -1,0 +1,46 @@
+name: Python3 CI
+
+on: ["push", "pull_request"]
+
+jobs:
+
+  python:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-18.04]
+        python-version: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Setup Machine
+      run: |
+        python3 -m pip install -r requirements.txt
+        curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.1/bazelisk-linux-amd64
+        chmod +x bazel
+        sudo mv bazel /usr/local/bin
+
+    - name: Cache Bazel Deps
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/bazel
+        key: ${{ runner.os }}-bazel
+
+    - name: Test
+      run: |
+        bazel test --test_output=streamed //...

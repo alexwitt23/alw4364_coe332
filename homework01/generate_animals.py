@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Simple script to write a json of random Dr. Moreau-esk animals to a json file."""
 
+__author__ = "Alex Witt <awitt2399@utexas.edu>"
+
 import json
 import pathlib
 import random
@@ -26,9 +28,16 @@ def generate_animal() -> Dict[str, Union[int, str]]:
     return animal
 
 
-if __name__ == "__main__":
+def main(save_dir: pathlib.Path = pathlib.Path(__file__).parent) -> None:
+    """Entrypoint function that generates 20 random animals them writes them to
+    a json file."""
     animals = {"animals": []}
     for _ in range(20):
         animals["animals"].append(generate_animal())
 
-    pathlib.Path("animals.json").write_text(json.dumps(animals, indent=2))
+    save_path = save_dir / "animals.json"
+    save_path.write_text(json.dumps(animals, indent=2))
+
+
+if __name__ == "__main__":
+    main()
