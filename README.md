@@ -9,8 +9,7 @@ The tests are defined as `Bazel` rules. `Bazelisk` is a clean way to use `Bazel`
 
 ```
 pushd $(mktemp -d)
-curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.1/bazelisk-linux-amd64
-
+curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
 chmod +x bazel
 sudo mv bazel /usr/local/bin
 popd
