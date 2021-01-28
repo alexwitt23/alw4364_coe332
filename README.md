@@ -1,5 +1,5 @@
 # COE332
-![Tests](https://github.com/alexwitt23/alw4364_coe332/workflows/tests/badge.svg)
+![tests](https://github.com/alexwitt23/alw4364_coe332/workflows/tests/badge.svg)
 ----
 
 This repo contains the homeworks and other assignments for COE322 taught in the
