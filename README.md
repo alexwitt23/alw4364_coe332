@@ -17,10 +17,10 @@ popd
 
 `Bazelisk` will read the `Bazel` version in `.bazelversion`.
 
-Once the above code runs, to test everything run:
-
-```
-bazel test //...s
-```
 
 ## Test
+
+All tests can be run like so:
+```
+bazel test //...
+```
