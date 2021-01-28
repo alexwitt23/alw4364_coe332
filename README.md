@@ -8,6 +8,9 @@ spring of 2021.
 The tests are defined as `Bazel` rules. `Bazelisk` is a clean way to use `Bazel`:
 
 ```
+python3 -m pip install -r requirements.txt
+
+# Install Bazelisk
 pushd $(mktemp -d)
 curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
 chmod +x bazel
