@@ -3,6 +3,7 @@
 
 __author__ = "Alex Witt <awitt2399@utexas.edu>"
 
+import argparse
 import json
 import pathlib
 import random
@@ -18,19 +19,29 @@ def choose_random_animal(animals_json: pathlib.Path) -> Dict[str, Union[int, str
     return random.choice(animal_data["animals"])
 
 
-def main(json_dir: pathlib.Path = pathlib.Path(__file__).parent) -> None:
+def main(
+    animals_json_path: pathlib.Path = pathlib.Path(__file__).parent / "animals.json",
+) -> None:
     """Entrypoint function to read a random animal from previously generated
     list of animals."""
 
-    animal_json = json_dir / "animals.json"
-    if not animal_json.is_file():
+    if not animals_json_path.is_file():
         raise FileNotFoundError(
-            f"Can't find {animal_json}. Please call generate_animals.py first!"
+            f"Can't find {animals_json_path}. Please call generate_animals.py first!"
         )
 
-    animal = choose_random_animal(animal_json)
+    animal = choose_random_animal(animals_json_path)
     print(animal)
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(__doc__)
+    parser.add_argument(
+        "--animals_json_path",
+        type=pathlib.Path,
+        required=False,
+        default=pathlib.Path(__file__).parent / "animals.json",
+        help="Where to find the generated animals json file.",
+    )
+    args = parser.parse_args()
+    main(animals_json_path=args.animals_json_path.expanduser())

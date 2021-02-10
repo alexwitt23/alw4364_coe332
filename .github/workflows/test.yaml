@@ -45,3 +45,8 @@ jobs:
     - name: Test
       run: |
         bazel test --test_output=streamed //...
+
+    - name: pytest
+      run: |
+        python3 -m pip install pytest
+        PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -q -s --doctest-modules --ignore-glob="bazel-*"
