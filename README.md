@@ -7,9 +7,10 @@
 This repo contains the homeworks and other assignments for COE322 taught in the
 spring of 2021.
 
+
 ## Setup
 
-Install the pip dependencies:
+Install the python dependencies:
 
 `python3 -m pip install -r requirements.txt`
 
@@ -27,11 +28,19 @@ popd
 You can check the latest available version for various devices
 [here](https://github.com/bazelbuild/bazelisk/releases).
 
-`Bazelisk` will read the `Bazel` version in `bazelversion`.
+`Bazelisk` will read the `Bazel` version in `.bazelversion`.
 
 
 ## Test
 
-All tests can be run like so:
+All tests can be run like so with `Bazel`:
 
-`bazel test //...`
+```
+bazel test //...
+```
+
+You can also run the tests with `pytest`:
+
+```
+PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -q -s --doctest-modules --ignore-glob="bazel-*"
+```

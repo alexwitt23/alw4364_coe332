@@ -5,33 +5,29 @@ Enhancements to Homework 01 and Dockerizing.
 
 ## Installation
 
-Install this project by cloning the repository, making the scripts executable, and adding them to
-your PATH. For example:
-
-
-```bash
-git clone ...
-chmod ...
-...
-...
-
-etc
-```
+Check the root `README` for instructions for cloning and getting the environment
+setup.
 
 ## Running the Code
 
-This code has two functions: blah and blah.
-
-To do blah1:
+As per the requirements for this project, you can choose to add the files
+in `homework02` to your path so they can be invoked simply from their filenames.
+If you do not want to permanatly add them to your path, run, from the _repo root_ like so:
 
 ```bash
-example
+PATH=$PATH:homework02 generate_animals.py \
+    --animals_save_path homework02/animals.json
 ```
 
-To do blah2:
+The above script `generate_animals.py` generates 20 random  Dr. Moreau-esk animals.
+The animals are saved to a json at the path specified by `--animals_save_path`.
+
+To read back a random animal from the collection and print some summary statistics,
+pass `read_animal.py` your json file:
 
 ```bash
-example
+PATH=$PATH:homework02 read_animals.py \
+    --animals_json_path homework02/animals.json
 ```
 
 
