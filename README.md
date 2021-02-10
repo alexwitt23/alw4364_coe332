@@ -13,7 +13,8 @@ Install the pip dependencies:
 
 `python3 -m pip install -r requirements.txt`
 
-The tests are defined as `Bazel` targets. `Bazelisk` is a clean way to inferface with `Bazel`:
+The tests are defined as `Bazel` targets. `Bazelisk` is a clean way to
+inferface with `Bazel`. It can be installed for `linux` machines as so:
 
 ```
 # Install Bazelisk
@@ -23,6 +24,8 @@ chmod +x bazel
 sudo mv bazel /usr/local/bin
 popd
 ```
+You can check the latest available version for various devices
+[here](https://github.com/bazelbuild/bazelisk/releases).
 
 `Bazelisk` will read the `Bazel` version in `bazelversion`.
 
