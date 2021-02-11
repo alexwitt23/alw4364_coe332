@@ -44,7 +44,7 @@ load(
     "container_pull",
 )
 container_pull(
-  name = "centos",
+  name = "centos7.7.1908",
   registry = "index.docker.io",
     repository = "library/centos",
     tag = "7.7.1908",

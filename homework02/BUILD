@@ -64,7 +64,7 @@ container_run_and_commit(
         "rm -rf /var/cache/yum",
         "python3 -m pip install --upgrade pip petname==2.2",
     ],
-    image = "@centos//image",
+    image = "@centos7.7.1908//image",
 )
 
 # Add our source files onto our prepared centos image.
@@ -84,11 +84,13 @@ container_image(
     },
 )
 
-# Push the docker image to Docker Hub.
+# Push the docker image to Docker Hub. Invoke this target with `bazel run`
+# to actually push it.
 container_push(
     name = "push_coe322_bazel_docker",
     format = "Docker",
-    image = ":coe322_bazel_docker",
+    image = ":coe322_bazel_docker.tar",
     registry = "index.docker.io",
-    repository = "alexwitt23/coe322_bazel_docker",
+    repository = "alexwitt23/json-parser-bazel",
+    tag = "latest"
 )

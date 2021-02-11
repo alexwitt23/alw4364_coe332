@@ -15,7 +15,7 @@ ADD homework02/read_animals.py /build
 ADD homework02/generate_animals.py /build
 
 # Upgrade pip and install packages
-RUN python3 -m pip install --upgrade --user pip petname==2.2
+RUN python3 -m pip install --upgrade pip petname==2.2
 
 # Set read and execute permissions on the files
 RUN chmod +rx generate_animals.py && \

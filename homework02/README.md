@@ -37,8 +37,10 @@ You can build a Docker image using the provided in this Dockerfile. NOTE: this c
 
 #### Building
 
+Note, the file path is relative to the root of the repo.
+
 ```bash
-docker build -f homework02/Dockerfile -t coe332-homework02 .
+docker build -f homework02/Dockerfile -t json-parser .
 ```
 
 #### Running
@@ -50,7 +52,8 @@ We then tell `generate_animals.py` to write the output file into `/data` on with
 the _container_ which is really mapped to our current local directory.
 
 ```bash
-docker run --rm -v $PWD:/data coe332-homework02:latest generate_animals.py \
+docker run --rm -v $PWD:/data -u $(id -u):$(id -g) \
+    coe332-homework02:latest generate_animals.py \
     --animals_save_path /data/homework02/animals.json
 ```
 You should now see  `homework02/animals.json` exists within your local copy of this
@@ -58,7 +61,8 @@ repo.
 
 A random animal can be read from this generated file with the following command:
 ```bash
-docker run --rm -v $PWD:/data coe332-homework02:latest read_animals.py \
+docker run --rm -v $PWD:/data -u $(id -u):$(id -g) \
+    coe332-homework02:latest read_animals.py \
     --animals_json_path /data/homework02/animals.json
 ```
 
@@ -66,6 +70,11 @@ If you'd like to enter the container and poke around, run:
 
 ```
 docker run --rm -ti coe332-homework02:latest /bin/bash
+```
+
+#### Pulling from DockerHub
+```
+docker pull alexwitt23/json-parser:latest
 ```
 
 ## Test
@@ -110,10 +119,22 @@ code.
 You can now run the container with docker just like the container above:
 
 ```bash
-docker run -ti --rm -v $PWD:/data alexwitt23/homework02:coe322_bazel_docker generate_animals.py \
+docker run -ti --rm -v $PWD:/data -u $(id -u):$(id -g) \
+    alexwitt23/homework02:coe322_bazel_docker generate_animals.py \
     --animals_save_path /data/homework02/animals.json
-docker run -ti --rm -v $PWD:/data alexwitt23/homework02:coe322_bazel_docker read_animals.py \
+docker run -ti --rm -v $PWD:/data -u $(id -u):$(id -g) \
+    alexwitt23/homework02:coe322_bazel_docker read_animals.py \
     --animals_json_path /data/homework02/animals.json
 ```
 
 There is also a target that pushes the bazel-built image to `DockerHub`:
+
+
+#### Pulling from DockerHub
+
+As specified in the `//homework02:push_coe322_bazel_docker` target, the
+bazel-built image is pushed to DockerHub and can be retrieved like so:
+
+```bash
+docker pull alexwitt23/json-parser-bazel:latest
+```
