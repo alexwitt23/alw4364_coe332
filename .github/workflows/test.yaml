@@ -50,5 +50,5 @@ jobs:
 
     - name: pytest
       run: |
-        python3 -m pip install pytest
+        python3 -m pip install pytest -r requirements.txt
         PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -s --doctest-modules --ignore-glob="bazel-*"
