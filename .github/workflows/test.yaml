@@ -35,7 +35,7 @@ jobs:
         sudo mv bazel /usr/local/bin
 
     - name: Setup Mac with Bazel
-      if: startsWith(runner.os, 'Linux')
+      if: startsWith(runner.os, 'macOS')
       run: |
         python3 -m pip install -r requirements.txt
         curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
