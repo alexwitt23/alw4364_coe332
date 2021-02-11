@@ -30,6 +30,8 @@ You can check the latest available version for various devices
 
 Bazelisk will read the Bazel version in `.bazelversion`.
 
+You will also need to have Docker installed on your device to run the Bazel tests.
+
 
 ## Test
 
