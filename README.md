@@ -47,7 +47,7 @@ You can also run the tests with `pytest`:
 PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -s --doctest-modules --ignore-glob="bazel-*"
 ```
 
-## Continious Integration
+## Continuous Integration
 
 All Bazel test targets are run through a Github Actions workflow. You can
 find this file in `.github/workflows/test.yaml`. Currently, Bazel is only run on
