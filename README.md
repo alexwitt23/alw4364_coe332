@@ -18,7 +18,7 @@ The tests are defined as `Bazel` targets. `Bazelisk` is a clean way to
 inferface with `Bazel`. It can be installed for `linux` machines as so:
 
 ```
-# Install Bazelisk
+# Install Bazelisk on Linux
 pushd $(mktemp -d)
 curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
 chmod +x bazel
@@ -42,5 +42,10 @@ bazel test //...
 You can also run the tests with `pytest`:
 
 ```
-PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -q -s --doctest-modules --ignore-glob="bazel-*"
+PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -s --doctest-modules --ignore-glob="bazel-*"
 ```
+
+## Continious Integration
+
+All `bazel` test targets are run through a Github Actions workflow. You can
+find this file in `.github/workflows/test.yaml`. Currently, the supported OS's are: `ubuntu-20.04, ubuntu-18.04, macos-latest`.

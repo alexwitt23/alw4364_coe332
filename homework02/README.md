@@ -87,7 +87,7 @@ the installation commands, to test everything run from the repo root:
 bazel test //...
 ```
 
-If you really don't like bazel or want to install it, you can run the python
+If you really don't like bazel or don't want to install it, you can run the python
 unittests with `pytest`:
 
 ```
@@ -127,7 +127,7 @@ docker run -ti --rm -v $PWD:/data -u $(id -u):$(id -g) \
     --animals_json_path /data/homework02/animals.json
 ```
 
-There is also a target that pushes the bazel-built image to `DockerHub`:
+There is also a target that pushes the bazel-built image to DockerHub:
 
 
 #### Pulling from DockerHub

@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-20.04, ubuntu-18.04, macos-latest]
         python-version: [3.6, 3.7, 3.8]
 
     steps:
@@ -26,13 +26,21 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Setup Machine
+    - name: Setup Linux with Bazel
+      if: startsWith(runner.os, 'Linux')
+      run: |
+        python3 -m pip install -r requirements.txt
+        curl -fL -o bazel bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.2/bazelisk-darwin-amd64
+        chmod +x bazel
+        sudo mv bazel /usr/local/bin
+
+    - name: Setup Mac with Bazel
+      if: startsWith(runner.os, 'Linux')
       run: |
         python3 -m pip install -r requirements.txt
         curl -fL -o bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.7.4/bazelisk-linux-amd64
         chmod +x bazel
         sudo mv bazel /usr/local/bin
-
 
     - name: Cache Bazel Deps
       id: cache
@@ -49,4 +57,4 @@ jobs:
     - name: pytest
       run: |
         python3 -m pip install pytest
-        PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -q -s --doctest-modules --ignore-glob="bazel-*"
+        PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -s --doctest-modules --ignore-glob="bazel-*"
