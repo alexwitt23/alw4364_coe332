@@ -28,12 +28,12 @@ popd
 You can check the latest available version for various devices
 [here](https://github.com/bazelbuild/bazelisk/releases).
 
-`Bazelisk` will read the `Bazel` version in `.bazelversion`.
+Bazelisk will read the Bazel version in `.bazelversion`.
 
 
 ## Test
 
-All tests can be run like so with `Bazel`:
+All tests can be run like so with Bazel:
 
 ```
 bazel test //...
@@ -47,5 +47,7 @@ PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -s --doctest-modules --ignore-glo
 
 ## Continious Integration
 
-All `bazel` test targets are run through a Github Actions workflow. You can
-find this file in `.github/workflows/test.yaml`. Currently, the supported OS's are: `ubuntu-20.04, ubuntu-18.04, macos-latest`.
+All Bazel test targets are run through a Github Actions workflow. You can
+find this file in `.github/workflows/test.yaml`. Currently, Bazel is only run on
+Linux systems. This is because Github Actions doesn't support native docker
+on MacOS. The `pytest` command is still run on MacOS, though.
