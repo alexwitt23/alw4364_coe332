@@ -19,6 +19,22 @@ def choose_random_animal(animals_json: pathlib.Path) -> Dict[str, Union[int, str
     return random.choice(animal_data["animals"])
 
 
+def breed_animal(
+    parent_a: Dict[str, Union[int, str]], parent_b: Dict[str, Union[int, str]]
+) -> Dict[str, Union[int, str]]:
+    """Take in two animal dictionaries and generate a child."""
+    # Take a random head from a parent.
+    child = {}
+    for key in ["head", "arms", "legs", "tails"]:
+        child[key] = random.choice([parent_a[key], parent_b[key]])
+    # Since each parent body is a combination of two animals, get two random parts
+    # from the four possible.
+    child["body"] = "-".join(
+        random.sample(parent_a["body"].split("-") + parent_b["body"].split("-"), 2)
+    )
+    return child, parent_a, parent_b
+
+
 def main(
     animals_json_path: pathlib.Path = pathlib.Path(__file__).parent / "animals.json",
 ) -> None:
@@ -32,6 +48,13 @@ def main(
 
     animal = choose_random_animal(animals_json_path)
     print(animal)
+
+    child, parent_a, parent_b = breed_animal(
+        choose_random_animal(animals_json_path), choose_random_animal(animals_json_path)
+    )
+    print("Two random animals have created a child!")
+    print(f"Parent A: {parent_a}\nParent B: {parent_b}")
+    print(f"Child: {child}")
 
 
 if __name__ == "__main__":

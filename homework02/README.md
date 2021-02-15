@@ -94,6 +94,12 @@ unittests with `pytest`:
 PYTHONPATH=. PY_IGNORE_IMPORTMISMATCH=1 pytest -q -s --doctest-modules --ignore-glob="bazel-*"
 ```
 
+Also, each test can be run individually from the command line:
+
+```bash
+PYTHONPATH=. homework02/read_animals_test.py
+```
+
 ## Docker with Bazel
 Docker is an amazing resource for packaging applications for distribution; however, it is not entirely hermetic. Bazel developers have created a system
 to address these shortcommings, and I've used their rules to develop a virtually

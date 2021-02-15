@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Simple unittests to ensure homework is correct."""
 
 __author__ = "Alex Witt <awitt2399@utexas.edu>"
