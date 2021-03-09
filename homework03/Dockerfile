@@ -15,6 +15,6 @@ COPY homework02 homework02
 
 RUN python3 -m pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 5038
 
 CMD ["python3", "app.py"]

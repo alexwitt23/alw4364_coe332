@@ -7,7 +7,7 @@ import requests
 
 if __name__ == "__main__":
 
-    url = "http://0.0.0.0:5000"
+    url = "http://0.0.0.0:5038"
     # Generate animals if they do not already exist.
     response = requests.get(f"{url}/create_animals?path=/tmp/animals.json&number=5")
     response = requests.get(f"{url}/animals")
