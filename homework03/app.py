@@ -16,6 +16,13 @@ cache = {"file_path": None}
 
 
 def read_data():
+    if cache["file_path"] is None:
+        raise FileNotFoundError(
+            """
+            Could not find a json file with animal information! You can create
+            some by calling the /create_animals route.
+            """
+        )
     return json.loads(pathlib.Path(cache["file_path"]).read_text())
 
 
@@ -33,7 +40,6 @@ def create_animals():
         animals["animals"].append(generate_animals.generate_animal())
 
     pathlib.Path(cache["file_path"]).write_text(json.dumps(animals))
-    return flask.Response(response="Created animals", status=201, headers={})
 
 
 @app.route("/animals", methods=["GET"])
