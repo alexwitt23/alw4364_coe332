@@ -3,6 +3,7 @@ Redis database."""
 
 import datetime
 import json
+import os
 
 import flask
 from flask import request
@@ -53,6 +54,7 @@ def get_date_range():
 
 @app.route("/get_uuid", methods=["GET"])
 def get_uuid():
+    """Get animal based on uuid specifier."""
     animal_uuid = request.args.get("uuid", default=1, type=str)
     return jsonify(rd.get(animal_uuid))
 
@@ -114,6 +116,8 @@ def remove_by_date():
 
 @app.route("/get_leg_average", methods=["GET"])
 def get_leg_average():
+    """Get the average number of legs across all the animals in 
+    the dataset."""
     animals = [json.loads(rd.get(key)) for key in rd.keys("*")]
     legs = [animal["legs"] for animal in animals]
     return jsonify(sum(legs) / len(legs))
@@ -121,11 +125,13 @@ def get_leg_average():
 
 @app.route("/get_num_animals", methods=["GET"])
 def get_num_animals():
+    """Get the total number of animals in the dataset."""
     return jsonify(len(list(rd.keys("*"))))
 
 
 @app.route("/get_animals", methods=["GET"])
 def get_animals():
+    """Print out all the animals in the dataset."""
     return jsonify({key: rd.get(key) for key in rd.keys("*")})
 
 

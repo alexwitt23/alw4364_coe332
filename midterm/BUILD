@@ -13,3 +13,4 @@ py_test(
     srcs = ["generate_animals_test.py"],
     deps = [":generate_animals"]
 )
+
