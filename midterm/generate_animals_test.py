@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Simple unittests to ensure homework is correct."""
+"""Simple unittests to ensure midterm is correct."""
 
 __author__ = "Alex Witt <awitt2399@utexas.edu>"
 
@@ -8,32 +8,24 @@ import pathlib
 from typing import Dict, Union
 import unittest
 
-from homework02 import generate_animals
+from midterm import generate_animals
 
 
 class TestGenerateAnimals(unittest.TestCase):
 
-    _animal_parts = ["head", "body", "arms", "legs", "tails"]
+    _animal_parts = ["head", "body", "arms", "legs", "tails", "created-on", "uuid"]
 
     def _check_keys(self, animal: Dict[str, Union[str, int]]) -> bool:
         return self._animal_parts == list(animal.keys())
 
     def test_animal_parts(self) -> None:
         animal = generate_animals.generate_animal()
-        self.assertEqual(self._animal_parts, list(animal.keys()))
+        self.assertListEqual(self._animal_parts, list(animal.keys()))
 
     def test_tails(self) -> None:
         """Tail should be the sum of arms and legs."""
         animal = generate_animals.generate_animal()
         self.assertEqual(animal["tails"], animal["arms"] + animal["legs"])
-
-    def test_written_json(self) -> None:
-        """A json file should be written in the same folder as
-        `generate_animals.py`."""
-        generate_animals.main()
-
-        json_path = pathlib.Path(__file__).parent / "animals.json"
-        self.assertTrue(json_path.is_file())
 
     def test_json_contents(self) -> None:
         """A json file should be written in the same folder as

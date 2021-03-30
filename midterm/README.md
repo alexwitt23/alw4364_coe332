@@ -1,13 +1,13 @@
 # Midterm
 
-In this homework, we containerize a flask application to read information from
-the json data generated in homeworks 1 and 2. An API is created to access this
-information.
+In this midterm, we compose a Flask application to read information from the json data
+generated from a modified `generate_animals.py`. The animals are sent to a redis
+database and an API is used to access the database items.
 
 ## Setup
 
-Building the docker container can be performed using the `docker-compose.yml`
-file in this folder. Run `docker-compose` from this repository's root:
+Building these docker containers can be performed using the `docker-compose.yml` file
+in this folder. Run `docker-compose` from this repository's _root_:
 
 ```bash
 docker-compose -f midterm/docker-compose.yml up -d
@@ -21,47 +21,71 @@ Once the container is running, you can query your local host on port `5038`.
 
 #### Generating Animals
 
-You can issue some curl commands like so to create an animals json:
-
-```bash
-curl "localhost:5038/create_animals"
-```
-
-This will create an `animals.json` file in the docker container. You can also
-specify a path where you want to save the json file. This is useful if you've
-mounted a folder.
-
-```bash
-curl "localhost:5038/create_animals?path=/tmp/animals.json"
-```
-
-The number of animals generated can also be supplied:
+You must first issue a command to generate animals and populate the database. The
+`create_animals` endpoint will generate 1 animal by default, or a desired number can be
+specified.
 
 ```bash
 curl "localhost:5038/create_animals?number=200"
 ```
 
-#### Reading Animals
+The endpoint returns the animals generated so the user can see the uuid's for futher
+manipulation.
 
-After creating animals, you can issue some curl commands like so to query to the
-generated animals. This will print out all the animals in the file:
+#### Query Date Range
 
-```bash
-curl "localhost:5038/animals"
-```
-
-You can also collect the animals by their head type or number of legs:
+A list of animals created in some time range can be queried:
 
 ```bash
-curl "localhost:5038/animals?head=snake&legs=10"
+curl "localhost:5038/get_date_range?start=YYYY-MM-DDTHH:MM:SS&end=YYYY-MM-DDTHH:MM:SS"
 ```
 
-## Example Script
-
-After starting the docker container, you can run
+The command does not have to have this much resolution, for example:
 
 ```bash
-./homework03/consumer.py
+curl "localhost:5038/get_date_range?start=YYYY-MM-DDTHH:MM:SS&end=YYYY-MM-DD"
 ```
 
-to run a few examples commands.
+#### Edit Creature
+
+If the uuid for a particular animal is known, new animal components can be supplied to
+update the animal in the dataset.
+
+```bash
+curl "localhost:5038/update_animal?uuid=foo&body=bar&arms=var0&legs=var1&tails=var2&"
+```
+
+
+#### Remove Animals by Date of Birth
+
+Animals can be removed from the database by specifying the start and end date range to
+the endpoint `remove_by_date`.
+
+```bash
+curl "localhost:5038/remove_by_date?start=YYYY-MM-DDTHH:MM:SS&end=YYYY-MM-DDTHH:MM:SS"
+```
+
+#### Average Leg Count
+
+The average number of legs across the animals can be found like so:
+
+```bash
+curl "localhost:5038/get_leg_average"
+```
+
+#### Total Number of Animals
+
+See the number of animals like so:
+
+```bash
+curl "localhost:5038/get_num_animals"
+```
+
+
+#### See Animals
+
+A command to see all the animals is:
+
+```bash
+curl "localhost:5038/get_animals"
+```

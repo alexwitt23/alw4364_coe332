@@ -1,8 +1,6 @@
-"""
-PYTHONPATH=. FLASK_APP=midterm/app.py FLASK_ENV=development python3 midterm/app.py
-"""
+"""This Flask app exposes a REST API which reads animal information from a
+Redis database."""
 
-import pathlib
 import datetime
 import json
 
@@ -21,6 +19,8 @@ rd = redis.StrictRedis(
 
 @app.route("/create_animals", methods=["GET"])
 def create_animals():
+    """Generate animals and populate a redis database. The function expects the
+    user to pass `number=foo`"""
     num_animals = request.args.get("number", default=1, type=int)
     for _ in range(num_animals):
         animal = generate_animals.generate_animal()

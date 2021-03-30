@@ -4,13 +4,12 @@ load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 
 py_library(
-    name = "app",
-    srcs = ["app.py"],
-    deps = ["//homework02:generate_animals"]
+    name = "generate_animals",
+    srcs = ["generate_animals.py"],
 )
 
 py_test(
-    name = "app_test",
-    srcs = ["app_test.py"],
-    deps = [":app"],
+    name = "generate_animals_test",
+    srcs = ["generate_animals_test.py"],
+    deps = [":generate_animals"]
 )
