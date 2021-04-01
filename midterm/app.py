@@ -30,7 +30,7 @@ def create_animals():
     if request.args.get("verbose", default=False, type=bool):
         return jsonify({key: rd.get(key) for key in rd.keys("*")})
     else:
-        return f"Created {num_animals} animals."
+        return f"Created {num_animals} animals.\n"
 
 
 @app.route("/get_date_range", methods=["GET"])

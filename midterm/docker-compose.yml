@@ -6,8 +6,7 @@ services:
     ports:
       - "5038:5000"
   redis:
-    container_name: alexwitt_redis_midterm
     image: "redis:alpine"
     volumes:
       - ./config/redis.conf:/redis.conf
-    command: redis /redis.conf
+    command: redis-server /redis.conf
