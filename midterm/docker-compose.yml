@@ -1,10 +1,12 @@
-version: "3.9"
+version: "3"
 services:
   web:
-    build:
-      context: ..
-      dockerfile: midterm/Dockerfile
+    container_name: alexwitt_midterm
+    build: .
     ports:
       - "5038:5000"
   redis:
     image: "redis:alpine"
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis-server /redis.conf

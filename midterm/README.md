@@ -7,10 +7,10 @@ database and an API is used to access the database items.
 ## Setup
 
 Building these docker containers can be performed using the `docker-compose.yml` file
-in this folder. Run `docker-compose` from this repository's _root_:
+in this folder. Run `docker-compose` from this `midterm` folder:
 
 ```bash
-docker-compose -f midterm/docker-compose.yml up -d
+docker-compose up -d
 ```
 
 The `-d` runs the docker container in the detached mode.
@@ -30,7 +30,11 @@ curl "localhost:5038/create_animals?number=200"
 ```
 
 The endpoint returns the animals generated so the user can see the uuid's for futher
-manipulation.
+manipulation if desired.
+
+```bash
+
+```
 
 #### Query Date Range
 

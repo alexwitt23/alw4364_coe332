@@ -27,7 +27,10 @@ def create_animals():
         animal = generate_animals.generate_animal()
         rd.set(animal["uuid"], json.dumps(animal))
 
-    return jsonify({key: rd.get(key) for key in rd.keys("*")})
+    if request.args.get("verbose", default=False, type=bool):
+        return jsonify({key: rd.get(key) for key in rd.keys("*")})
+    else:
+        return f"Created {num_animals} animals.\n"
 
 
 @app.route("/get_date_range", methods=["GET"])
@@ -116,7 +119,7 @@ def remove_by_date():
 
 @app.route("/get_leg_average", methods=["GET"])
 def get_leg_average():
-    """Get the average number of legs across all the animals in 
+    """Get the average number of legs across all the animals in
     the dataset."""
     animals = [json.loads(rd.get(key)) for key in rd.keys("*")]
     legs = [animal["legs"] for animal in animals]

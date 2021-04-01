@@ -40,6 +40,7 @@ def create_animals():
         animals["animals"].append(generate_animals.generate_animal())
 
     pathlib.Path(cache["file_path"]).write_text(json.dumps(animals))
+    return "Created animals"
 
 
 @app.route("/animals", methods=["GET"])
