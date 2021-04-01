@@ -1,8 +1,13 @@
-version: "3.9"
+version: "3"
 services:
   web:
+    container_name: alexwitt_midterm
     build: .
     ports:
       - "5038:5000"
   redis:
+    container_name: alexwitt_redis_midterm
     image: "redis:alpine"
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis /redis.conf
