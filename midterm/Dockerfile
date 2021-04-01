@@ -10,7 +10,7 @@ WORKDIR /app
 
 ENV FLASK_ENV=development
 COPY requirements.txt .
-COPY midterm midterm
+COPY . midterm
 RUN ls
 
 RUN python3 -m pip install -r requirements.txt
