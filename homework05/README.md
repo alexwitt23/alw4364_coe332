@@ -85,3 +85,39 @@ pod "hello" deleted
 ```
 
 ## Part C
+
+1.
+```
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello
+  labels:
+    greeting: personalized
+spec:
+  containers:
+    - name: hello
+      image: ubuntu:18.04
+      command: ['sh', '-c', 'echo "Hello, $NAME from IP $POD_IP!" && sleep 3600']
+      env:
+        - name: "NAME"
+          value: "Alex"
+        - name: "POD_IP"
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+```
+
+2.
+```
+$ kubectl get pods -o wide
+NAME                                    READY   STATUS    RESTARTS   AGE     IP             NODE                         NOMINATED NODE   READINESS GATES
+hello                                   1/1     Running   0          42s     10.244.3.110   c01                          <none>           <none>
+```
+
+3.
+```
+$ kubectl logs hello
+Hello, Alex from IP 10.244.3.110!
+```
