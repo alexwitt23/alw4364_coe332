@@ -1,0 +1,15 @@
+---
+apiVersion: apps/v1
+kind: pvc
+metadata:
+  name: alexwitt-test-redis-pvc
+  labels:
+    username: alexwitt
+    env: test
+spec:
+  accessModes:
+    - readWriteOnce
+  storageClass: rbd
+  resources:
+    requests:
+      storage: 1Gi
