@@ -1,6 +1,6 @@
 ---
-apiVersion: apps/v1
-kind: pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: alexwitt-test-redis-pvc
   labels:
@@ -8,8 +8,8 @@ metadata:
     env: test
 spec:
   accessModes:
-    - readWriteOnce
-  storageClass: rbd
+  - ReadWriteOnce
+  storageClassName: rbd
   resources:
     requests:
       storage: 1Gi

@@ -1,6 +1,6 @@
 ---
 apiVersion: apps/v1
-kind: deploy
+kind: Deployment
 metadata:
   name: alexwitt-test-redis-deployment
   labels:
@@ -25,10 +25,10 @@ spec:
         volumeMounts:
         - name: alexwitt-test-redis-pvc
           mountPath: "/data"
-          ports:
-          - name: redis
-            containerPoint: 6379
+        ports:
+        - name: redis
+          containerPort: 6379
       volumes:
       - name: alexwitt-test-redis-pvc
-      persistentVolumeClaim:
-        claimName: alexwitt-test-redis-pvc
+        persistentVolumeClaim:
+          claimName: alexwitt-test-redis-pvc
