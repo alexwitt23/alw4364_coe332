@@ -1,6 +1,6 @@
 ---
-apiVersion: apps/v1
-kind: svc
+apiVersion: v1
+kind: Service
 metadata:
   name: alexwitt-test-flask-service
   labels:
