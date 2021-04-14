@@ -1,0 +1,18 @@
+---
+apiVersion: apps/v1
+kind: svc
+metadata:
+  name: alexwitt-test-flask-service
+  labels:
+    username: alexwitt
+    env: test
+spec:
+  type: ClusterIP
+  selector:
+    username: alexwitt
+    env: test
+    app: alexwitt-test-flask
+  ports:
+  - name: flask
+    port: 5000
+    targetPort: 500

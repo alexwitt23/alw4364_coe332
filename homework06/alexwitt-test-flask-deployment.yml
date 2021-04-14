@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: deploy
+metadata:
+  name: alexwitt-test-flask-deployment
+  labels:
+    app: alexwitt-test-flask
+    username: alexwitt
+    env: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: alexwitt-test-flask
+  template:
+    metadata:
+      labels:
+        app: alexwitt-test-flask
+        username: alexwitt
+        env: test
+    spec:
+      containers:
+      - name: alexwitt-test-flask
+        image: alexwitt/midterm
+        volumeMounts:
+        - name: alexwitt-test-redis-pvc
+          mountPath: "/data"
+          ports:
+          - name: flask
+            containerPoint: 5000
+      env:
+      - name: "REDIS_HOST"
+        value: "10.101.101.139"
