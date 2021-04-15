@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alexwitt-test-redis-service
+  labels:
+    username: alexwitt
+    env: test
+spec:
+  type: ClusterIP
+  selector:
+    username: alexwitt
+    env: test
+    app: alexwitt-test-redis
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: 6379
