@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: alexwitt-test-flask
-        image: alexwitt/midterm
+        image: alexwitt23/coe332-midterm
         ports:
         - name: flask
           containerPort: 5000
