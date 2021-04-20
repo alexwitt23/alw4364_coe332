@@ -1,8 +1,9 @@
 FROM python:3.9
 
+WORKDIR /
 ADD requirements.txt /requirements.txt
 RUN pip install -r requirements.txt
-COPY source /app
+COPY src /app
 WORKDIR /app
 
 ENTRYPOINT ["python"]
