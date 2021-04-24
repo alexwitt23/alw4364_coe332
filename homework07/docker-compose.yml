@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app:
+    image: alexwitt23/coe332-hw07
+    pull_policy: always
+    command: python3 api.py
+    ports:
+      - "5000:5000"
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis-server /redis.conf
+    ports:
+      - "6379:6379"
+  worker:
+    image: alexwitt23/coe332-hw07
+    command: python3 worker.py
+    depends_on:
+      - app
+      - redis

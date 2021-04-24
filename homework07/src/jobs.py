@@ -1,17 +1,22 @@
-import uuid
-from hotqueue import HotQueue
-from redis import StrictRedis
+"""Utilities for creating and managing jobs."""
 
-q = HotQueue("queue", host="172.17.0.1", port=6379, db=1)
-rd = redis.StrictRedis(host="172.17.0.1", port=6379, db=0)
+import uuid
+
+from hotqueue import HotQueue
+import redis
+
+rd = redis.StrictRedis(
+    host="redis", port=6379, db=0, charset="utf=8", decode_responses=True
+)
+q = HotQueue("queue", host="redis", port=6379, db=1)
 
 
 def _generate_jid():
     return str(uuid.uuid4())
 
 
-def _generate_job_key(jid):
-    return "job.{}".format(jid)
+def _generate_job_key(jid: str) -> str:
+    return f"job.{jid}"
 
 
 def _instantiate_job(jid, status, start, end):
@@ -30,9 +35,9 @@ def add_job(start, end, status="submitted"):
     jid = _generate_jid()
     job_dict = _instantiate_job(jid, status, start, end)
     # update call to save_job:
-    save_job(_generate_job_key(jid), job_dict)
+    _save_job(_generate_job_key(jid), job_dict)
     # update call to queue_job:
-    queue_job(jid)
+    _queue_job(jid)
     return job_dict
 
 
@@ -46,15 +51,6 @@ def _queue_job(jid):
     q.put(jid)
 
 
-def add_job(start, end, status="submitted"):
-    """Add a job to the redis queue."""
-    jid = _generate_jid()
-    job_dict = _instantiate_job(jid, status, start, end)
-    _save_job(jid, job_dict)
-    _queue_job(jid)
-    return job_dict
-
-
 def update_job_status(jid, new_status):
     """Update the status of job with job id `jid` to status `status`."""
     jid, status, start, end = rd.hmget(
@@ -66,3 +62,7 @@ def update_job_status(jid, new_status):
         _save_job(_generate_job_key(job["id"]), job)
     else:
         raise Exception()
+
+
+def get_job_status(jid: str) -> str:
+    return rd.hgetall(f"job.{jid}")
