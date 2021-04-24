@@ -12,3 +12,7 @@ spec:
     username: alexwitt
     env: test
     app: alexwitt-hw7-worker
+  ports:
+  - name: worker
+    port: 5001
+    targetPort: 5001
