@@ -1,6 +1,7 @@
-import json
+"""An API to submitte and query information about jobs."""
 
 import flask
+from flask import jsonify
 from flask import request
 
 import jobs
@@ -15,9 +16,9 @@ def jobs_api():
     except Exception as e:
         return (
             True,
-            json.dumps({"status": "Error", "message": "Invalid JSON: {}.".format(e)}),
+            jsonify({"status": "Error", "message": "Invalid JSON: {}.".format(e)}),
         )
-    return json.dumps(jobs.add_job(job["start"], job["end"]))
+    return jsonify(jobs.add_job(job["start"], job["end"]))
 
 
 @app.route("/job_status", methods=["GET"])
@@ -27,9 +28,9 @@ def get_job_status():
     except Exception as e:
         return (
             True,
-            json.dumps({"status": "Error", "message": "Invalid JSON: {}.".format(e)}),
+            jsonify({"status": "Error", "message": "Invalid JSON: {}.".format(e)}),
         )
-    return json.dumps(jobs.get_job_status(job_id))
+    return jsonify(jobs.get_job_status(job_id))
 
 
 if __name__ == "__main__":

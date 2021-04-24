@@ -6,9 +6,9 @@ from hotqueue import HotQueue
 import redis
 
 rd = redis.StrictRedis(
-    host="redis", port=6379, db=0, charset="utf=8", decode_responses=True
+    host="0.0.0.0", port=6379, db=0, charset="utf=8", decode_responses=True
 )
-q = HotQueue("queue", host="redis", port=6379, db=1)
+q = HotQueue("queue", host="0.0.0.0", port=6379, db=1)
 
 
 def _generate_jid():
