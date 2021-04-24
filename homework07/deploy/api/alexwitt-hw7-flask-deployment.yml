@@ -6,21 +6,21 @@ metadata:
   labels:
     app: alexwitt-hw7-flask
     username: alexwitt
-    env: test
+    env: hw7
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: alexwitt-test-flask
+      app: alexwitt-hw7-flask
   template:
     metadata:
       labels:
-        app: alexwitt-test-flask
+        app: alexwitt-hw7-flask
         username: alexwitt
-        env: test
+        env: hw7
     spec:
       containers:
-      - name: alexwitt-test-flask
+      - name: alexwitt-hw7-flask
         image: alexwitt23/coe332-hw07
         ports:
         - name: flask
