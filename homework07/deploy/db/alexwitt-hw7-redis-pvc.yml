@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: alexwitt-test-redis-pvc
+  name: alexwitt-hw7-redis-pvc
   labels:
     username: alexwitt
-    env: test
+    env: hw7
 spec:
   accessModes:
   - ReadWriteOnce
