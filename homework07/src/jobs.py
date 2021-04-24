@@ -2,13 +2,13 @@
 
 import uuid
 
-from hotqueue import HotQueue
+import hotqueue
 import redis
 
 rd = redis.StrictRedis(
-    host="0.0.0.0", port=6379, db=0, charset="utf=8", decode_responses=True
+    host="redis", port=6379, db=0, charset="utf=8", decode_responses=True
 )
-q = HotQueue("queue", host="0.0.0.0", port=6379, db=1)
+q = hotqueue.HotQueue("queue", host="redis", port=6379, db=1)
 
 
 def _generate_jid():
@@ -66,3 +66,30 @@ def update_job_status(jid, new_status):
 
 def get_job_status(jid: str) -> str:
     return rd.hgetall(f"job.{jid}")
+
+
+def get_completed_jobs() -> str:
+    completed_jobs = []
+    for key in rd.keys():
+        if rd.hgetall(key)["status"] == "complete":
+            completed_jobs.append(rd.hgetall(key))
+
+    return completed_jobs
+
+
+def get_incomplete_jobs() -> str:
+    completed_jobs = []
+    for key in rd.keys():
+        if rd.hgetall(key)["status"] != "complete":
+            completed_jobs.append(rd.hgetall(key))
+
+    return completed_jobs
+
+
+def get_inprogress_jobs() -> str:
+    completed_jobs = []
+    for key in rd.keys():
+        if rd.hgetall(key)["status"] == "in progress":
+            completed_jobs.append(rd.hgetall(key))
+
+    return completed_jobs

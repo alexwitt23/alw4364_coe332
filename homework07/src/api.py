@@ -33,5 +33,20 @@ def get_job_status():
     return jsonify(jobs.get_job_status(job_id))
 
 
+@app.route("/completed_jobs", methods=["GET"])
+def get_completed_jobs():
+    return jsonify(jobs.get_completed_jobs())
+
+
+@app.route("/incomplete_jobs", methods=["GET"])
+def get_incomplete_jobs():
+    return jsonify(jobs.get_incomplete_jobs())
+
+
+@app.route("/inprogress_jobs", methods=["GET"])
+def get_inprogress_jobs():
+    return jsonify(jobs.get_inprogress_jobs())
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
