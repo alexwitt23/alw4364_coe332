@@ -1,8 +1,6 @@
 schemaVersion: 2.0.0
 
 metadataTest:
-  entrypoint: ['python3']
-  cmd: ['app.py']
   labels:
     - key: "version"
       value: "0.1"
