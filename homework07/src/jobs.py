@@ -1,14 +1,15 @@
 """Utilities for creating and managing jobs."""
-
+import os
 import uuid
 
 import hotqueue
 import redis
 
+_REDIS_IP = os.environ.get("REDIS_IP")
 rd = redis.StrictRedis(
-    host="redis", port=6379, db=0, charset="utf=8", decode_responses=True
+    host=_REDIS_IP, port=6379, db=0, charset="utf=8", decode_responses=True
 )
-q = hotqueue.HotQueue("queue", host="redis", port=6379, db=1)
+q = hotqueue.HotQueue("queue", host=_REDIS_IP, port=6379, db=1)
 
 
 def _generate_jid():

@@ -2,31 +2,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alexwitt-hw7-flask-deployment
+  name: alexwitt-hw7-worker-deployment
   labels:
-    app: alexwitt-hw7-flask
+    app: alexwitt-hw7-worker
     username: alexwitt
     env: test
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: alexwitt-test-flask
+      app: alexwitt-test-worker
   template:
     metadata:
       labels:
-        app: alexwitt-test-flask
+        app: alexwitt-test-worker
         username: alexwitt
         env: test
     spec:
       containers:
-      - name: alexwitt-test-flask
+      - name: alexwitt-test-worker
         image: alexwitt23/coe332-hw07
-        ports:
-        - name: flask
-          containerPort: 5000
         env:
-        - name: "REDIS_HOST"
+        - name: REDIS_IP
           value: "10.96.8.238"
+        - name: WORKER_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         imagePullPolicy: Always
-        command: [ "python3", "api.py" ]
+        command: [ "python3", "worker.py" ]
