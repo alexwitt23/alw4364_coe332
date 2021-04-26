@@ -1,9 +1,3 @@
-curl localhost:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'
-
-
-docker-compose up -d
-
-
 ## Kubernetes
 
 Start up all the services and pods:
@@ -32,18 +26,53 @@ env:
     value: "10.102.15.202"
 ```
 
+then apply the changes:
+
+```
+homework07]$ kubectl apply -f deploy/api && \
+  kubectl apply -f deploy/worker
+```
+
 
 ## Usage
 
+Find the python debug container:
+
 ```
-$ curl localhost:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'
+$ kubectl get pods
+NAME                                             READY   STATUS    RESTARTS   AGE
+alexwitt-hw7-debug-5cc8cdd65f-8n8j4              1/1     Running   0          10m
+alexwitt-hw7-flask-deployment-c5ddc9bd8-g4mfb    1/1     Running   0          8m12s
+alexwitt-hw7-flask-deployment-c5ddc9bd8-kkqpn    1/1     Running   0          8m13s
+alexwitt-hw7-redis-deployment-547dc86c4f-726mt   1/1     Running   0          10m
+alexwitt-hw7-worker-deployment-65f47f469-gfml8   1/1     Running   0          8m13s
+alexwitt-hw7-worker-deployment-65f47f469-kt278   1/1     Running   0          8m11s
+```
+
+Then exec into the pod so we can access the kubernetes network:
+```
+kubectl exec -ti alexwitt-hw7-debug-5cc8cdd65f-8n8j4 -- /bin/bash
+```
+
+
+Inside the pod, we can issue POST commands to the flask API:
+
+```
+# curl 10.109.215.82:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'
+```
+
+This command will return the job description:
+
+```
 {
   "end": "2",
-  "id": "559237ef-f2cf-4a7e-b717-325dc163525f",
+  "id": "7c3d047d-efc0-4672-b1bd-9f981e31337b",
   "start": "1",
   "status": "submitted"
 }
 ```
+
+
 
 ```
 curl localhost:5000/job_status?job_id=559237ef-f2cf-4a7e-b717-325dc163525f
@@ -72,3 +101,11 @@ homework07]$ kubectl delete -f deploy/api && \
   kubectl delete -f deploy/debug && \
   kubectl delete -f deploy/worker
 ```
+
+
+
+## Local Deployment
+curl localhost:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'
+
+
+docker-compose up -d
