@@ -185,7 +185,9 @@ curl localhost:5000/incomplete_jobs
       curl 10.109.215.82:5000/jobs -d '{"start": "7", "end": "8"}' -H 'Content-Type: application/json'; \
       curl 10.109.215.82:5000/jobs -d '{"start": "9", "end": "10"}' -H 'Content-Type: application/json';
     ```
+
     which outputs the job data:
+
     ```
     {
       "end": "2",
@@ -218,10 +220,11 @@ curl localhost:5000/incomplete_jobs
       "status": "submitted"
     }
     ```
+
   b. The job status can be checked by entering a python debug pod and manually checking
      the redis database:
 
-    ```
+
     root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# python3
     Python 3.9.2 (default, Feb 19 2021, 17:11:58)
     [GCC 8.3.0] on linux
@@ -238,7 +241,7 @@ curl localhost:5000/incomplete_jobs
     {'id': '8710819b-db76-4116-8ed7-3ea9e6388928', 'status': 'complete', 'start': '7', 'end': '8'}
     >>> rd.hgetall('job.47c22e9b-a512-4820-9a1a-c03c07569a73')
     {'id': '47c22e9b-a512-4820-9a1a-c03c07569a73', 'status': 'complete', 'start': '9', 'end': '10'}
-    ```
+
 
 
 ## Part B
