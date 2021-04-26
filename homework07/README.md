@@ -49,7 +49,7 @@ alexwitt-hw7-worker-deployment-65f47f469-gfml8   1/1     Running   0          8m
 alexwitt-hw7-worker-deployment-65f47f469-kt278   1/1     Running   0          8m11s
 ```
 
-Then exec into the pod so we can access the kubernetes network:
+Then, exec into the pod so we can access the kubernetes network:
 ```
 kubectl exec -ti alexwitt-hw7-debug-5cc8cdd65f-8n8j4 -- /bin/bash
 ```
@@ -72,6 +72,18 @@ This command will return the job description:
 }
 ```
 
+In the debug pod, you can now look into the redis database and check the job's status:
+
+```
+root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# python3
+Python 3.9.2 (default, Feb 19 2021, 17:11:58)
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import redis; import hotqueue
+>>> rd = redis.StrictRedis(host="10.103.175.2", port=6379, db=0, charset="utf=8", decode_responses=True)
+>>> rd.hgetall('job.7c3d047d-efc0-4672-b1bd-9f981e31337b')
+{'id': '7c3d047d-efc0-4672-b1bd-9f981e31337b', 'status': 'complete', 'start': '1', 'end': '2'}
+```
 
 
 ```
