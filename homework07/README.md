@@ -246,6 +246,10 @@ curl localhost:5000/incomplete_jobs
 
 ## Part B
 
+1. See `deploy/worker/alexwitt-hw7-worker-deployment.yml`
+2. A new function is created in `src.jobs.py` to update a job's content. This is called
+  by the worker function.
+
 ## Part C
 
 Worker scaled to 2 pods:
