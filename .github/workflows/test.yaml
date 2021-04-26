@@ -34,15 +34,6 @@ jobs:
         chmod +x bazel
         sudo mv bazel /usr/local/bin
 
-    - name: Cache Bazel Deps
-      if: startsWith(runner.os, 'Linux')
-      id: cache
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.cache/bazel
-        key: ${{ runner.os }}-bazel
-
     - name: Test
       if: startsWith(runner.os, 'Linux')
       run: |
