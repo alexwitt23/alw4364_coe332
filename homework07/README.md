@@ -274,7 +274,30 @@ root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# curl 10.109.215.82:5000/jobs -d '{"s
   curl 10.109.215.82:5000/jobs -d '{"start": "19", "end": "20"}' -H 'Content-Type: application/json';
 ```
 
+  b.
+  ```
+  root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# python3
+      Python 3.9.2 (default, Feb 19 2021, 17:11:58)
+      [GCC 8.3.0] on linux
+      Type "help", "copyright", "credits" or "license" for more information.
+      >>> import redis; import hotqueue
+      >>> rd = redis.StrictRedis(host="10.103.175.2", port=6379, db=0, charset="utf=8", decode_responses=True)
+      >>> for id in ids:
+      ...     rd.hgetall(f'job.{id}')
+      ...
+      {'id': 'f56fd601-6d21-410b-9beb-04d88bdb7daa', 'status': 'complete', 'start': '1', 'end': '2', 'worker-ip': '10.244.12.150'}
+      {'id': 'cea9b8b9-dfe4-4b07-be30-b296d9ad5d7d', 'status': 'complete', 'start': '3', 'end': '4', 'worker-ip': '10.244.15.110'}
+      {'id': 'e1381999-170f-42ee-a2bb-a19dac4beff0', 'status': 'complete', 'start': '5', 'end': '6', 'worker-ip': '10.244.12.150'}
+      {'id': '250d4b61-7c24-4512-99b4-46866c53a981', 'status': 'complete', 'start': '7', 'end': '8', 'worker-ip': '10.244.15.110'}
+      {'id': '3b30544f-98a3-407a-a854-8d4f9c1c57e6', 'status': 'complete', 'start': '9', 'end': '10', 'worker-ip': '10.244.12.150'}
+      {'id': 'd2eae15b-6a6c-4420-8eb3-b58e8b9d3e11', 'status': 'complete', 'start': '11', 'end': '12', 'worker-ip': '10.244.15.110'}
+      {'id': '10c64db3-84ad-45eb-bcbb-fe8f50e4aefc', 'status': 'complete', 'start': '13', 'end': '14', 'worker-ip': '10.244.12.150'}
+      {'id': '3168eba5-505c-4f41-ad79-2b9ccc7bcae0', 'status': 'complete', 'start': '15', 'end': '16', 'worker-ip': '10.244.15.110'}
+      {'id': '4664ef33-ac58-4f13-8529-dadd1d3a0d6b', 'status': 'complete', 'start': '17', 'end': '18', 'worker-ip': '10.244.12.150'}
+      {'id': '39d8243c-1b46-4322-a814-b2247a37bc9b', 'status': 'complete', 'start': '19', 'end': '20', 'worker-ip': '10.244.15.110'}
+  ```
 
+  c. Worker with ip `10.244.12.150` processed 5 jobs, and worker with ip `10.244.15.110` processed 5 jobs.
 
 
 ## Kubernetes Teardown
