@@ -20,9 +20,9 @@ spec:
           image: ubuntu:18.04
           command: ['sh', '-c', 'echo "Hello, Kubernetes!" >> /data/out.txt && sleep 3600']
           volumeMounts:
-          - name: hello-alexwitt-data
+          - name: alexwitt-hw7-data
             mountPath: "/data"
       volumes:
-      - name: hello-alexwitt-data
+      - name: alexwitt-hw7-data
         persistentVolumeClaim:
-          claimName: hello-alexwitt-data
+          claimName: alexwitt-hw7-data
