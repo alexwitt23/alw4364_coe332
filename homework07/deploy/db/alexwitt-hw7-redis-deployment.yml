@@ -6,7 +6,7 @@ metadata:
   labels:
     app: alexwitt-hw7-redis
     username: alexwitt
-    env: hw7
+    env: test
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
       labels:
         app: alexwitt-hw7-redis
         username: alexwitt
-        env: hw7
+        env: test
     spec:
       containers:
       - name: alexwitt-hw7-redis

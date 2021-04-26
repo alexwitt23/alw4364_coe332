@@ -5,7 +5,7 @@ metadata:
   name: alexwitt-hw7-redis-pvc
   labels:
     username: alexwitt
-    env: hw7
+    env: test
 spec:
   accessModes:
   - ReadWriteOnce

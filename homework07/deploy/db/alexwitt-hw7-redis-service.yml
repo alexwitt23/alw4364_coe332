@@ -5,12 +5,12 @@ metadata:
   name: alexwitt-hw7-redis-service
   labels:
     username: alexwitt
-    env: hw7
+    env: test
 spec:
   type: ClusterIP
   selector:
     username: alexwitt
-    env: hw7
+    env: test
     app: alexwitt-hw7-redis
   ports:
   - name: redis

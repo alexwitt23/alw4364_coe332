@@ -5,12 +5,12 @@ metadata:
   name: alexwitt-hw7-flask-service
   labels:
     username: alexwitt
-    env: hw7
+    env: test
 spec:
   type: ClusterIP
   selector:
     username: alexwitt
-    env: hw7
+    env: test
     app: alexwitt-hw7-flask
   ports:
   - name: flask
