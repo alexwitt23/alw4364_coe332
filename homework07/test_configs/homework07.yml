@@ -1,0 +1,19 @@
+schemaVersion: 2.0.0
+
+metadataTest:
+  labels:
+    - key: "version"
+      value: "0.1"
+    - key: "desc"
+      value: "Image for homework07"
+
+fileExistenceTests:
+  - name: 'api_file_exists'
+    path: '/app/api.py'
+    shouldExist: true
+  - name: 'jobs_file_exists'
+    path: '/app/jobs.py'
+    shouldExist: true
+  - name: 'worker_file_exists'
+    path: '/app/worker.py'
+    shouldExist: true

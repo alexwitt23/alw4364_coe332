@@ -1,0 +1,28 @@
+version: "3"
+services:
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - ./config/redis.conf:/redis.conf
+    command: redis-server /redis.conf
+    ports:
+      - "6379:6379"
+  app:
+    build: .
+    pull_policy: always
+    command: api.py
+    ports:
+      - "5000:5000"
+    depends_on:
+      - "redis"
+    environment:
+      - REDIS_IP=redis
+  worker:
+    build: .
+    pull_policy: always
+    command: worker.py
+    depends_on:
+      - "redis"
+      - "app"
+    environment:
+      - REDIS_IP=redis

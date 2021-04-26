@@ -36,8 +36,15 @@ load(
     "container_pull",
 )
 container_pull(
-  name = "centos7.7.1908",
-  registry = "index.docker.io",
+    name = "centos7.7.1908",
+    registry = "index.docker.io",
     repository = "library/centos",
     tag = "7.7.1908",
+)
+
+container_pull(
+    name = "python",
+    registry = "index.docker.io",
+    repository = "library/python",
+    tag = "3.9-alpine",
 )
