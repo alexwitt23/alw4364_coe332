@@ -53,6 +53,7 @@ container_image(
     directory = "/app",
     workdir = "/app",
     repository = "alexwitt23",
+    entrypoint = ["python3"]
 )
 
 # Push the docker image to Docker Hub. Invoke this target with `bazel run`

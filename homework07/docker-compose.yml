@@ -8,9 +8,9 @@ services:
     ports:
       - "6379:6379"
   app:
-    image: alexwitt23/coe332-hw07
+    build: .
     pull_policy: always
-    command: python3 api.py
+    command: api.py
     ports:
       - "5000:5000"
     depends_on:
@@ -18,9 +18,9 @@ services:
     environment:
       - REDIS_IP=redis
   worker:
-    image: alexwitt23/coe332-hw07
+    build: .
     pull_policy: always
-    command: python3 worker.py
+    command: worker.py
     depends_on:
       - "redis"
       - "app"

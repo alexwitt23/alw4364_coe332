@@ -172,6 +172,75 @@ curl localhost:5000/incomplete_jobs
 
 ## Part A
 
+1. See `Dockerfile`
+2. See:
+  * `deploy/api/alexwitt-hw7-flask-deployment.yml`
+  * `deploy/worker/alexwitt-hw7-worker-deployment.yml`
+3. Create some jobs
+  a.
+    ```
+    root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# curl 10.109.215.82:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'; \
+      curl 10.109.215.82:5000/jobs -d '{"start": "3", "end": "4"}' -H 'Content-Type: application/json'; \
+      curl 10.109.215.82:5000/jobs -d '{"start": "5", "end": "6"}' -H 'Content-Type: application/json'; \
+      curl 10.109.215.82:5000/jobs -d '{"start": "7", "end": "8"}' -H 'Content-Type: application/json'; \
+      curl 10.109.215.82:5000/jobs -d '{"start": "9", "end": "10"}' -H 'Content-Type: application/json';
+    ```
+    which outputs the job data:
+    ```
+    {
+      "end": "2",
+      "id": "81e4d5ac-9fd8-410b-8e98-e60afb94b9bf",
+      "start": "1",
+      "status": "submitted"
+    }
+    {
+      "end": "4",
+      "id": "822b7238-78ea-4622-9097-ffc62703d816",
+      "start": "3",
+      "status": "submitted"
+    }
+    {
+      "end": "6",
+      "id": "ac76a47a-ef25-4969-8e0e-b614f1124b26",
+      "start": "5",
+      "status": "submitted"
+    }
+    {
+      "end": "8",
+      "id": "8710819b-db76-4116-8ed7-3ea9e6388928",
+      "start": "7",
+      "status": "submitted"
+    }
+    {
+      "end": "10",
+      "id": "47c22e9b-a512-4820-9a1a-c03c07569a73",
+      "start": "9",
+      "status": "submitted"
+    }
+    ```
+  b. The job status can be checked by entering a python debug pod and manually checking
+     the redis database:
+
+    ```
+    root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# python3
+    Python 3.9.2 (default, Feb 19 2021, 17:11:58)
+    [GCC 8.3.0] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> import redis; import hotqueue
+    >>> rd = redis.StrictRedis(host="10.103.175.2", port=6379, db=0, charset="utf=8", decode_responses=True)
+    >>> rd.hgetall('job.81e4d5ac-9fd8-410b-8e98-e60afb94b9bf')
+    {'id': '81e4d5ac-9fd8-410b-8e98-e60afb94b9bf', 'status': 'complete', 'start': '1', 'end': '2'}
+    >>> rd.hgetall('job.822b7238-78ea-4622-9097-ffc62703d816')
+    {'id': '822b7238-78ea-4622-9097-ffc62703d816', 'status': 'complete', 'start': '3', 'end': '4'}
+    >>> rd.hgetall('job.ac76a47a-ef25-4969-8e0e-b614f1124b26')
+    {'id': 'ac76a47a-ef25-4969-8e0e-b614f1124b26', 'status': 'complete', 'start': '5', 'end': '6'}
+    >>> rd.hgetall('job.8710819b-db76-4116-8ed7-3ea9e6388928')
+    {'id': '8710819b-db76-4116-8ed7-3ea9e6388928', 'status': 'complete', 'start': '7', 'end': '8'}
+    >>> rd.hgetall('job.47c22e9b-a512-4820-9a1a-c03c07569a73')
+    {'id': '47c22e9b-a512-4820-9a1a-c03c07569a73', 'status': 'complete', 'start': '9', 'end': '10'}
+    ```
+
+
 ## Part B
 
 ## Part C

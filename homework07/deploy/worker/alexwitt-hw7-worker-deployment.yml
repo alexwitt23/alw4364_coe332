@@ -30,4 +30,4 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         imagePullPolicy: Always
-        command: [ "python3", "worker.py" ]
+        command: [ "worker.py" ]
