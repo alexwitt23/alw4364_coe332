@@ -99,4 +99,6 @@ def get_inprogress_jobs() -> str:
 
 def add_job_data(jid: str, data: Dict[str, Any]) -> None:
     key = f"job.{jid}"
-    rd.hmset(key, rd.hgetall(key).update(data))
+    d = rd.hgetall(key)
+    d.update(data)
+    rd.hmset(key, d)
