@@ -1,5 +1,6 @@
 """Utilities for creating and managing jobs."""
 import os
+from typing import Any, Dict
 import uuid
 
 import hotqueue
@@ -94,3 +95,8 @@ def get_inprogress_jobs() -> str:
             completed_jobs.append(rd.hgetall(key))
 
     return completed_jobs
+
+
+def add_job_data(jid: str, data: Dict[str, Any]) -> None:
+    key = f"job.{jid}"
+    rd.hmset(key, rd.hgetall(key).update(data))
