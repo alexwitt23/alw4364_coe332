@@ -1,3 +1,70 @@
+
+## API
+
+Here are the endpoints present in the API.
+
+
+#### Jobs
+
+Add new job to the database.
+
+* URL: /jobs
+* Method: `POST`
+* URL Params
+  - None
+* Data Params
+  - {"start": "1", "end": "2"}
+
+
+#### Job Status
+
+Returns job status.
+
+* URL: /jobs_status
+* Method: `GET`
+* URL Params
+  - job_id=[string]
+* Data Params
+  - None
+
+
+#### Completed Jobs
+
+Returns all completed jobs.
+
+* URL: /completed_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
+
+
+#### Incomplete Jobs
+
+Returns all incomplete jobs.
+
+* URL: /incomplete_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
+
+
+#### Inprogress Jobs
+
+Returns all inprogress jobs.
+
+* URL: /inprogress_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
+
+
+
 ## Kubernetes
 
 Start up all the services and pods:
@@ -101,6 +168,37 @@ curl localhost:5000/inprogress_jobs
 ```
 curl localhost:5000/incomplete_jobs
 ```
+
+
+## Part A
+
+## Part B
+
+## Part C
+
+Worker scaled to 2 pods:
+
+```
+spec:
+  replicas: 2
+```
+
+Create 10 more jobs:
+
+```
+root@alexwitt-hw7-debug-5cc8cdd65f-8n8j4:/# curl 10.109.215.82:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "3", "end": "4"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "5", "end": "6"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "7", "end": "8"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "9", "end": "10"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "11", "end": "12"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "13", "end": "14"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "15", "end": "16"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "17", "end": "18"}' -H 'Content-Type: application/json'; \
+  curl 10.109.215.82:5000/jobs -d '{"start": "19", "end": "20"}' -H 'Content-Type: application/json';
+```
+
+
 
 
 ## Kubernetes Teardown
