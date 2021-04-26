@@ -27,6 +27,6 @@ spec:
           containerPort: 5000
         env:
         - name: "REDIS_IP"
-          value: "10.96.8.238"
+          value: "10.102.15.202"
         imagePullPolicy: Always
         command: [ "python3", "api.py" ]

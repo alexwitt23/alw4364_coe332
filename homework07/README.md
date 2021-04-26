@@ -4,6 +4,29 @@ curl localhost:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: appli
 docker-compose up -d
 
 
+## Kubernetes
+
+Start up all the services and pods:
+
+```
+homework07]$ kubectl apply -f deploy/api && \
+  kubectl apply -f deploy/db && \
+  kubectl apply -f deploy/debug && \
+  kubectl apply -f deploy/worker
+```
+
+The first time the services are started, you'll need to grab the IP address of
+the redis service and add that to the api and worker .ymls:
+
+```
+$ kubectl get service
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+alexwitt-hw7-redis-service    ClusterIP   10.102.15.202    <none>        6379/TCP         2m59s
+```
+
+
+
+
 ## Usage
 
 ```
