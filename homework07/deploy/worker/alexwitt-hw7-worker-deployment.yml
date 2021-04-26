@@ -24,7 +24,7 @@ spec:
         image: alexwitt23/coe332-hw07
         env:
         - name: REDIS_IP
-          value: "10.102.15.202"
+          value: "10.103.175.2"
         - name: WORKER_IP
           valueFrom:
             fieldRef:

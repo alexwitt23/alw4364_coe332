@@ -60,3 +60,15 @@ curl localhost:5000/inprogress_jobs
 ```
 curl localhost:5000/incomplete_jobs
 ```
+
+
+## Kubernetes Teardown
+
+To close all the pods, run:
+
+```
+homework07]$ kubectl delete -f deploy/api && \
+  kubectl delete -f deploy/db && \
+  kubectl delete -f deploy/debug && \
+  kubectl delete -f deploy/worker
+```
