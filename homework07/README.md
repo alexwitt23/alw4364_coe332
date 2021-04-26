@@ -70,7 +70,7 @@ Returns all inprogress jobs.
 Start up all the services and pods:
 
 ```
-homework07]$ kubectl apply -f deploy/api && \
+$ kubectl apply -f deploy/api && \
   kubectl apply -f deploy/db && \
   kubectl apply -f deploy/debug && \
   kubectl apply -f deploy/worker
@@ -96,7 +96,7 @@ env:
 then apply the changes:
 
 ```
-homework07]$ kubectl apply -f deploy/api && \
+$ kubectl apply -f deploy/api && \
   kubectl apply -f deploy/worker
 ```
 
@@ -311,10 +311,10 @@ homework07]$ kubectl delete -f deploy/api && \
   kubectl delete -f deploy/worker
 ```
 
-
-
 ## Local Deployment
-curl localhost:5000/jobs -d '{"start": "1", "end": "2"}' -H 'Content-Type: application/json'
 
+You make also run everything with docker-compose:
 
+```
 docker-compose up -d
+```
