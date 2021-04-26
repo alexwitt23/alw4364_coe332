@@ -15,4 +15,4 @@ spec:
   ports:
   - name: flask
     port: 5000
-    targetPort: 500
+    targetPort: 5000
