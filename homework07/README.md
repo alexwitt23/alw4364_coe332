@@ -1,69 +1,6 @@
+# Homework07
 
-## API
-
-Here are the endpoints present in the API.
-
-
-#### Jobs
-
-Add new job to the database.
-
-* URL: /jobs
-* Method: `POST`
-* URL Params
-  - None
-* Data Params
-  - {"start": "1", "end": "2"}
-
-
-#### Job Status
-
-Returns job status.
-
-* URL: /jobs_status
-* Method: `GET`
-* URL Params
-  - job_id=[string]
-* Data Params
-  - None
-
-
-#### Completed Jobs
-
-Returns all completed jobs.
-
-* URL: /completed_jobs
-* Method: `GET`
-* URL Params
-  - None
-* Data Params
-  - None
-
-
-#### Incomplete Jobs
-
-Returns all incomplete jobs.
-
-* URL: /incomplete_jobs
-* Method: `GET`
-* URL Params
-  - None
-* Data Params
-  - None
-
-
-#### Inprogress Jobs
-
-Returns all inprogress jobs.
-
-* URL: /inprogress_jobs
-* Method: `GET`
-* URL Params
-  - None
-* Data Params
-  - None
-
-
+REST API with Kubernetes
 
 ## Kubernetes
 
@@ -318,3 +255,67 @@ You make also run everything with docker-compose:
 ```
 docker-compose up -d
 ```
+
+## API
+
+Here are the endpoints present in the API.
+
+
+#### Jobs
+
+Add new job to the database.
+
+* URL: /jobs
+* Method: `POST`
+* URL Params
+  - None
+* Data Params
+  - {"start": "1", "end": "2"}
+
+
+#### Job Status
+
+Returns job status.
+
+* URL: /jobs_status
+* Method: `GET`
+* URL Params
+  - job_id=[string]
+* Data Params
+  - None
+
+
+#### Completed Jobs
+
+Returns all completed jobs.
+
+* URL: /completed_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
+
+
+#### Incomplete Jobs
+
+Returns all incomplete jobs.
+
+* URL: /incomplete_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
+
+
+#### Inprogress Jobs
+
+Returns all inprogress jobs.
+
+* URL: /inprogress_jobs
+* Method: `GET`
+* URL Params
+  - None
+* Data Params
+  - None
