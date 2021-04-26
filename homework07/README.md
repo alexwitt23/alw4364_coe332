@@ -24,7 +24,13 @@ NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)
 alexwitt-hw7-redis-service    ClusterIP   10.102.15.202    <none>        6379/TCP         2m59s
 ```
 
+Add this `CLUSTER-IP` to the ymls:
 
+```
+env:
+  - name: REDIS_IP
+    value: "10.102.15.202"
+```
 
 
 ## Usage
